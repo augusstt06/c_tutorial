@@ -1,6 +1,7 @@
 .vscode/
 .idea/
 */a.out
+*.txt
 ### macOS ###
 # General
 .DS_Store
