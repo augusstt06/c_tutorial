@@ -2,11 +2,10 @@
 #include <stdlib.h>
 #define MAX 3
 
+// 선형큐
 typedef struct Queue
 {
-    // 앞쪽 인덱스
     int front;
-    // 뒤쪽 인덱스
     int rear;
     int data[MAX];
 } Queue;
