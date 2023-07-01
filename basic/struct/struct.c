@@ -11,12 +11,15 @@ struct Man
     int age;
     double weight;
 };
-// typedef 사용
+// typedef 구조체
 typedef struct
 {
     char name[3];
     int age;
 } Student;
+
+// typedef 사용하여 구조체 배열 선언
+typedef Student s_arr[2];
 
 int main(void)
 {
@@ -26,7 +29,17 @@ int main(void)
     Kim.weight = 63.3;
     printf("%d - %f", Kim.age, Kim.weight);
 
+    // typedef 이용한 구조체 변수 선언
     Student kim = {"김충연", "18"};
+
+    // 구조체 배열
+    struct Man Man_arr[2] =
+        {
+            {18, 72.3},
+            {17, 80.2}};
+    // typedef 사용한 구조체 배열
+    s_arr students = {{"cnffjd", 18},
+                      {"augg", 19}};
 
     return 0;
 }
