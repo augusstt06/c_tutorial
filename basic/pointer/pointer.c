@@ -1,19 +1,19 @@
+// 메모리의 주소를 저장하려면 포인터 사용 (주소 저장하는 변수)
+// 포인터 변수 선언 : int *psx
+// 포인터 변수는 4byte (32비트 플랫폼)
+// 포인터에 주소 대입 : y = *px
+
+// 선언 예제
 #include <stdio.h>
 
-int main()
+int main(void)
 {
-    int arr[] = {1, 2, 3, 4};
+    int x = 10, y;
+    // 포인터 px 선언
+    int *px;
 
-    int *pointer = arr;
-
-    printf("%010x", pointer + 0);
-    printf("%010x", pointer + 1);
-    printf("%010x", pointer + 2);
-    printf("%010x", pointer + 3);
-
+    // 포인터 px에 x의 주소 대입
+    px = &x;
+    y = *px;
     return 0;
 }
-
-// pointer + 정수
-// 현재 pointer변수가 가리키는 주소값에 n*4 byte를 더한 주소를 나타낸다.
-// pointer 변수가 할당된 데이터 타입이 integer하면 n*4씩 증가
