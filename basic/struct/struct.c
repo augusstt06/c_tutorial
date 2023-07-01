@@ -11,6 +11,12 @@ struct Man
     int age;
     double weight;
 };
+// typedef 사용
+typedef struct
+{
+    char name[3];
+    int age;
+} Student;
 
 int main(void)
 {
@@ -19,5 +25,8 @@ int main(void)
     Kim.age = 18;
     Kim.weight = 63.3;
     printf("%d - %f", Kim.age, Kim.weight);
+
+    Student kim = {"김충연", "18"};
+
     return 0;
 }
