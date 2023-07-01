@@ -1,49 +1,23 @@
-// 구조체
-// 여러가지의 자료형을 묶어서 사용자가 편리하게 접근/사용하게 만든다.
+// 주로 사용하는 자료형
+// 정수 int, 실수 double, 문자 char, 문자열 char *, char[]
+// 서로 다른 자료형들을 묶어 사용하는 것.
 
+// 예시
 #include <stdio.h>
-// 간단한 구조체 정의
-struct test
+
+// 구조체 선언
+struct Man
 {
-    int x;
-    int y;
+    int age;
+    double weight;
 };
 
-// p1,p2라는 구조체 변수 선언
-struct test2
+int main(void)
 {
-    int x;
-    int y;
-} t1, t2;
-
-// 변수에 접근하기
-struct point
-{
-    int x;
-    int y;
-};
-
-int main()
-{
-    struct point pos;
-    pos.x = 10;
-    pos.y = 20;
-
-    printf("현재 좌표 : (%d, %d)", pos.x, pos.y);
-    return 0;
-}
-
-// typedef
-// 구조체의 별칭 선언
-typedef struct Score
-{
-    char name[20];
-    int kor;
-    int eng
-} S;
-
-int Example()
-{
-    S s1 = {"typedef 사용", 50, 20};
+    // 선언한 구조체 변수 선언
+    struct Man Kim;
+    Kim.age = 18;
+    Kim.weight = 63.3;
+    printf("%d - %f", Kim.age, Kim.weight);
     return 0;
 }
