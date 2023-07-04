@@ -18,6 +18,7 @@ typedef struct
 {
     char name[3];
     int age;
+    x
 } Student;
 
 // 구조체 Student를 가리키는 포인터
