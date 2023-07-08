@@ -1,3 +1,5 @@
+// 이진트리 구현
+
 #include "binary.h"
 
 Node *createNode(ElementType newData)
