@@ -25,5 +25,6 @@ ElementType pop_stack(arrayStack *stack);
 ElementType top_stack(arrayStack *stack);
 int getSize(arrayStack *stack);
 int isEmpty(arrayStack *stack);
+int isFull(arrayStack *stack);
 
 #endif

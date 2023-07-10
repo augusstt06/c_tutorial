@@ -16,8 +16,14 @@ void deleteStack(arrayStack *stack)
 
 void push_stack(arrayStack *stack, ElementType data)
 {
-    stack->top++;
-    stack->nodes[stack->top].data = data;
+    if (isFull(stack) == -1)
+        printf("Stack is already Full");
+    else
+    {
+        stack->top++;
+        stack->nodes[stack->top].data = data;
+        printf("Successfully added an element %d to the Stack! Stack has %d capacity left\n", data, (stack->capacity) - getSize(stack));
+    }
 }
 
 ElementType pop_stack(arrayStack *stack)
@@ -39,6 +45,13 @@ int isEmpty(arrayStack *stack)
 {
     return stack->top == -1;
 }
+int isFull(arrayStack *stack)
+{
+    if (stack->capacity == getSize(stack))
+        return -1;
+    else
+        return 0;
+}
 
 int main(void)
 {
@@ -48,6 +61,7 @@ int main(void)
     push_stack(stack, 5);
     push_stack(stack, 23);
     push_stack(stack, 16);
+    isFull(stack);
 
     printf("Capacity : %d, Size : %d, Top : %d\n\n", stack->capacity, getSize(stack), top_stack(stack));
 
@@ -55,7 +69,7 @@ int main(void)
     {
         if (isEmpty(stack))
             break;
-        printf("Pop : %d", pop_stack(stack));
+        printf("Pop : %d\n", pop_stack(stack));
 
         if (!isEmpty(stack))
             printf("Current Top : %d\n", top_stack(stack));
