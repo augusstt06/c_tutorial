@@ -1,6 +1,6 @@
 // 배열이 아닌 구조에도 사용이 가능하다.
 
-#include "binaryTree.h"
+#include "binaryTreeSearch.h"
 
 Node *createNode(ElementType newData)
 {
