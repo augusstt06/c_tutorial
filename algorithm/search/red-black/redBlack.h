@@ -27,10 +27,10 @@ void insertNode(Node** tree, Node* newNode);
 void insertNodeHelper(Node** tree, Node* newNode);
 Node* removeNode(Node** root, ElementType target);
 void rebuildAfterInsert(Node** tree, Node* newNode);
-void rebuildAfterRemove(Node** root, Node* X);
+void rebuildAfterRemove(Node** root, Node* x);
 
 void printTree(Node* node, int depth, int blackcount);
-void roatateLeft(Node** root, Node* parent);
+void rotateLeft(Node** root, Node* parent);
 void rotateRight(Node** root, Node* parent);
 
 #endif
