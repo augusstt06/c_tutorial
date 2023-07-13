@@ -1,7 +1,7 @@
 #include "redBlack.h"
 #include <string.h>
 
-extern Node *NIL;
+Node *Nil;
 
 Node *createNode(ElementType newData)
 {
@@ -22,20 +22,20 @@ void deleteNode(Node *node)
 
 void deleteTree(Node *tree)
 {
-    if (tree->right != NIL)
+    if (tree->right != Nil)
         deleteTree(tree->right);
-    if (tree->left != NIL)
+    if (tree->left != Nil)
         deleteTree(tree->left);
 
-    tree->right = NIL;
-    tree->left = NIL;
+    tree->right = Nil;
+    tree->left = Nil;
 
     deleteNode(tree);
 }
 
 Node *searchNode(Node *tree, ElementType target)
 {
-    if (tree == NIL)
+    if (tree == Nil)
         return NULL;
 
     if (tree->data > target)
@@ -48,9 +48,9 @@ Node *searchNode(Node *tree, ElementType target)
 
 Node *searchMinNode(Node *tree)
 {
-    if (tree == NIL)
-        return NIL;
-    if (tree->left == NIL)
+    if (tree == Nil)
+        return Nil;
+    if (tree->left == Nil)
         return tree;
     else
         return searchMinNode(tree->left);
@@ -61,8 +61,8 @@ void insertNode(Node **tree, Node *newNode)
     insertNodeHelper(tree, newNode);
 
     newNode->Color = RED;
-    newNode->left = NIL;
-    newNode->right = NIL;
+    newNode->left = Nil;
+    newNode->right = Nil;
 
     rebuildAfterInsert(tree, newNode);
 }
@@ -73,7 +73,7 @@ void insertNodeHelper(Node **tree, Node *newNode)
         (*tree) = newNode;
     if ((*tree)->data < newNode->data)
     {
-        if ((*tree)->right == NIL)
+        if ((*tree)->right == Nil)
         {
             (*tree)->right = newNode;
             newNode->parent = (*tree);
@@ -85,7 +85,7 @@ void insertNodeHelper(Node **tree, Node *newNode)
     }
     else if ((*tree)->data > newNode->data)
     {
-        if ((*tree)->left == NIL)
+        if ((*tree)->left == Nil)
         {
             (*tree)->left = newNode;
             newNode->parent = (*tree);
@@ -103,7 +103,7 @@ void rotateRight(Node **root, Node *parent)
 
     parent->left = leftChild->right;
 
-    if (leftChild->right != NIL)
+    if (leftChild->right != Nil)
         leftChild->right->parent = parent;
 
     leftChild->parent = parent->parent;
@@ -127,12 +127,12 @@ void rotateLeft(Node **root, Node *parent)
 
     parent->right = rightChild->left;
 
-    if (rightChild->left != NIL)
+    if (rightChild->left != Nil)
         rightChild->left->parent = parent;
 
     rightChild->parent = parent->parent;
 
-    if (parnet->parent == NULL)
+    if (parent->parent == NULL)
         (*root) = rightChild;
     else
     {
@@ -187,7 +187,7 @@ void rebuildAfterInsert(Node **root, Node *x)
             }
             else
             {
-                if (x = x->parent->left)
+                if (x == x->parent->left)
                 {
                     x = x->parent;
                     rotateRight(root, x);
@@ -213,7 +213,7 @@ Node *removeNode(Node **root, ElementType data)
     if (target == NULL)
         return NULL;
 
-    if (target->left == NIL || target->right == NIL)
+    if (target->left == Nil || target->right == Nil)
     {
         removed = target;
     }
@@ -223,7 +223,7 @@ Node *removeNode(Node **root, ElementType data)
         target->data = removed->data;
     }
 
-    if (removed->left != NIL)
+    if (removed->left != Nil)
         successor = removed->left;
     else
         successor = removed->right;
@@ -329,11 +329,11 @@ void rebuildAfterRemove(Node **root, Node *successor)
 void printTree(Node *node, int depth, int blackcount)
 {
     int i = 0;
-    char c = "X";
+    char c = 'X';
     int v = -1;
     char cnt[100];
 
-    if (node == NULL || node == NIL)
+    if (node == NULL || node == Nil)
         return;
     if (node->Color == BLACK)
         blackcount++;
@@ -342,12 +342,12 @@ void printTree(Node *node, int depth, int blackcount)
         v = node->parent->data;
 
         if (node->parent->left == node)
-            c = "L";
+            c = 'L';
         else
-            c = "R";
+            c = 'R';
     }
 
-    if (node->left == NIL && node->right == NIL)
+    if (node->left == Nil && node->right == Nil)
         sprintf(cnt, "--------- %d", blackcount);
     else
         strncpy(cnt, "", sizeof(cnt));
@@ -356,6 +356,78 @@ void printTree(Node *node, int depth, int blackcount)
         printf(" ");
     printf("%d %s [%c, %d] %s\n", node->data, (node->Color = RED) ? "RED" : "BLACK", c, v, cnt);
 
-    printTree(node->left depth + 1, blackcount);
+    printTree(node->left, depth + 1, blackcount);
     printTree(node->right, depth + 1, blackcount);
+}
+
+int main(void)
+{
+    Node *tree = NULL;
+    Node *node = NULL;
+
+    Nil = createNode(0);
+    Nil->Color = BLACK;
+
+    while (1)
+    {
+        int cmd = 0;
+        int param = 0;
+        char buffer[10];
+
+        printf("Enter Command Number : \n");
+        printf("(1) Create a Node, (2) Remove a Node, (3) Search a Node\n");
+        printf("(4) Display Tree (5) Quit Program\n");
+        printf("command number : ");
+
+        fgets(buffer, sizeof(buffer) - 1, stdin);
+        sscanf(buffer, "%d", &cmd);
+
+        if (cmd < 1 || cmd > 5)
+        {
+            printf("Invalid Command Number.\n");
+            continue;
+        }
+        else if (cmd == 4)
+        {
+            printTree(tree, 0, 0);
+            printf("\n");
+            continue;
+        }
+        else if (cmd == 5)
+            break;
+
+        printf("Enter parameter (1~200) :\n");
+        fgets(buffer, sizeof(buffer) - 1, stdin);
+        sscanf(buffer, "%d", &param);
+
+        if (param < 1 || param > 200)
+        {
+            printf("Invalid parameter %d.\n", param);
+            continue;
+        }
+        switch (cmd)
+        {
+        case 1:
+            insertNode(&tree, createNode(param));
+            break;
+        case 2:
+            node = removeNode(&tree, param);
+
+            if (node == NULL)
+                printf("Not Found node to Delete %d.\n", param);
+            else
+                deleteNode(node);
+            break;
+        case 3:
+            node = searchNode(tree, param);
+            if (node == NULL)
+                printf("Not Found Node %d\n", param);
+            else
+                printf("Found Node : %d(Color : %s)\n", node->data, (node->Color == RED) ? "RED" : "BLACK");
+            break;
+        }
+        printf("\n");
+    }
+    deleteTree(tree);
+    return 0;
 }

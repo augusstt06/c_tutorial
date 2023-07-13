@@ -1,4 +1,4 @@
-#ifndef redBLack_h
+#ifndef redBlack_h
 #define redBlack_h
 
 #include <stdio.h>
